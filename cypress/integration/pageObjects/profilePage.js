@@ -14,7 +14,6 @@ class profilePage extends basePage {
     }
 
     openPageURL() {
-        // this.pageUrl = 'https://www.sbzend.ssls.com/user/profile'
         this.pageUrl = 'https://www.ssls.com/user/profile'
         super.openPageURL(this.pageUrl)
     }
@@ -24,55 +23,51 @@ class profilePage extends basePage {
     }
 
     getEmailFieldText() {
-        return cy.get(this.locators.emailField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.get(this.locators.emailField).then((element) => {
+            const elementText = element.text()
+            return elementText
         })
     }
 
     getNameFieldText1() {
-        return cy.get(this.locators.nameField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.get(this.locators.nameField).then((element) => {
+            const elementText = element.text()
+            return elementText
         })
     }
 
     getPasswordField() {
-        return cy.get(this.locators.passwordField).then((x) => {
-            const myText = x.text()
-            return assert.notEqual(myText, '')
+        return cy.get(this.locators.passwordField).then((element) => {
+            const elementText = element.text()
+            return assert.notEqual(elementText, '')
         })
     }
 
     getPhoneFieldText() {
-        return cy.get(this.locators.phoneField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.get(this.locators.phoneField).then((element) => {
+            const elementText = element.text()
+            return elementText
         })
     }
 
     getAddressFieldText() {
-        return cy.get(this.locators.addressField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.get(this.locators.addressField).then((element) => {
+            const elementText = element.text()
+            return elementText
         })
     }
 
     getSupportPinText() {
-        return cy.xpath(this.locators.supportPinField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.xpath(this.locators.supportPinField).then((element) => {
+            const elementText = element.text()
+            return elementText
         })
     }
 
     getNewsLetterButton() {
-        return cy.get(this.locators.newsletterSwitch).then((x) => {
-            return x
+        return cy.get(this.locators.newsletterSwitch).then((element) => {
+            return element
         })
-        // return cy.get(this.locators.newsletterSwitch).should('be.checked')
     }
-
-
-
 }
 export default profilePage

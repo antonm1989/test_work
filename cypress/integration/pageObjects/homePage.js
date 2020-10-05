@@ -1,15 +1,14 @@
 import basePage from "./basePage"
 
 class homePage extends basePage {
-    
+
     setupLocators() {
-        super.addLocator("loginText" , "//span[contains(text(),'Log in')]")
+        super.addLocator("logInText", "//span[contains(text(),'Log in')]")
         super.addLocator("loggedInUserIcon", "//span[contains(text(),'ssls.automation+666@gmail.com')]")
-        super.addLocator("dropdownTriangle","//i[@class='ssls-icon ssls-icon-user-circle']")
+        super.addLocator("dropdownTriangle", "//i[@class='ssls-icon ssls-icon-user-circle']")
         super.addLocator("profileDropdownOption", "//a[@href='/user/profile']")
-        // a[href='/user/profile']
     }
-    
+
     openPageURL() {
         this.pageUrl = 'https://www.ssls.com/'
         super.openPageURL(this.pageUrl)
@@ -20,22 +19,22 @@ class homePage extends basePage {
     }
 
     getLoginText() {
-        return cy.xpath(this.locators.loginText)
+        return cy.xpath(this.locators.logInText)
     }
 
-    getLoggedInUserIcon(){
+    getLoggedInUserIcon() {
         return cy.xpath(this.locators.loggedInUserIcon)
     }
 
-    getDropdownTriangle(){
+    getDropdownTriangle() {
         return cy.xpath(this.locators.dropdownTriangle)
     }
 
-    getProfileDropdownOption(){
+    getProfileDropdownOption() {
         return cy.xpath(this.locators.profileDropdownOption)
     }
 
-    getLogOutDropdownOption(){
+    getLogOutDropdownOption() {
         return cy.get('button').contains('Log out')
     }
 }

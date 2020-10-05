@@ -12,8 +12,7 @@ authPage.setupLocators()
 homePage.setupLocators()
 profilePage.setupLocators()
 
-let profileDetails = {
-
+let userProfileDetails = {
     name: '',
     email: '',
     password: '',
@@ -23,23 +22,27 @@ let profileDetails = {
     newsLetter: ''
 }
 
+const registeredUser = {
+    email: 'ssls.automation+666@gmail.com',
+    password: '123456'
+}
+
+const nonRegisteredUser = {
+    email: 'random_email@gmail.com',
+    password: '123456'
+}
+
 Given('I am not registered user', () => {
-    user.email = 'random_email@gmail.com'
-    user.password = '123456'
+    user.email = nonRegisteredUser.email
+    user.password = nonRegisteredUser.password
 });
 
 Given('I am registered user', () => {
-    user.email = 'ssls.automation+666@gmail.com'
-    user.password = '123456'
-});
-
-Given('I am logged in', () => {
-    user.email = 'ssls.automation+666@gmail.com'
-    user.password = '123456'
+    user.email = registeredUser.email
+    user.password = registeredUser.password
 });
 
 When('I open Home page', () => {
-
     homePage.openPageURL()
 });
 
@@ -60,9 +63,12 @@ Then('I should see credentials inputs', () => {
     authPage.getPasswordInput().should('be.visible')
 });
 
-When('I enter credentials and click on eye icon', () => {
+When('I enter credentials', () => {
     authPage.getEmailInput().type(user.email)
     authPage.getPasswordInput().type(user.password)
+});
+
+When('I click on eye icon', () => {
     authPage.getEyeIcon().should('be.visible').click()
 });
 
@@ -83,8 +89,11 @@ Then('I should see User icon', () => {
     homePage.getLoginText().should('not.be.visible')
 });
 
-When('I click dropdown triangle and select Profile', () => {
+When('I click dropdown triangle', () => {
     homePage.getDropdownTriangle().should('be.visible').click()
+});
+
+When('I select Profile', () => {
     homePage.getProfileDropdownOption().should('be.visible').click()
 });
 
@@ -95,98 +104,90 @@ Then('I should see Profile page', () => {
 Then('I should see Profile details', () => {
 
     profilePage.getEmailFieldText()
-        .then((myTxt) => {
-            profileDetails.email = myTxt
-            console.log("email: " + profileDetails.email)
+        .then((elementText) => {
+            userProfileDetails.email = elementText
         })
 
     profilePage.getPhoneFieldText()
-        .then((myTxt) => {
-            console.log("phone: " + myTxt)
-            profileDetails.phone = myTxt
+        .then((elementText) => {
+            userProfileDetails.phone = elementText
         })
 
     profilePage.getNameFieldText1()
-        .then((myTxt) => {
-            console.log("name: " + myTxt)
-            profileDetails.name = myTxt
+        .then((elementText) => {
+            userProfileDetails.name = elementText
         })
 
     profilePage.getAddressFieldText()
-        .then((myTxt) => {
-            console.log("address: " + myTxt)
-            profileDetails.address = myTxt
+        .then((elementText) => {
+            userProfileDetails.address = elementText
         })
 
     profilePage.getSupportPinText()
-        .then((myTxt) => {
-            console.log("pin: " + myTxt)
-            profileDetails.supportPin = myTxt
+        .then((elementText) => {
+            userProfileDetails.supportPin = elementText
         })
 
     profilePage.getPasswordField()
-        .then((myTxt) => {
-            if (myTxt !== '') { profileDetails.password = 'true' }
-            else { profileDetails.password = 'false' }
-            console.log("password is not empty: " + profileDetails.password)
+        .then((elementText) => {
+            if (elementText !== '') { userProfileDetails.password = 'true' }
+            else { userProfileDetails.password = 'false' }
         })
 
     profilePage.getNewsLetterButton()
-        .then((x) => {
-            if (x.is("enabled")) { profileDetails.newsLetter = 'true' }
-            else { profileDetails.newsLetter = 'false' }
-            console.log("newsLetter status: " + profileDetails.newsLetter)
+        .then((element) => {
+            if (element.is("enabled")) { userProfileDetails.newsLetter = 'true' }
+            else { userProfileDetails.newsLetter = 'false' }
         })
 });
 
-When('I click dropdown triangle and select Log Out', () => {
-    homePage.getDropdownTriangle().should('be.visible').click()
+When('I select Log Out', () => {
     homePage.getLogOutDropdownOption().click()
 });
 
 Then('I should see the same Profile details as before', () => {
     profilePage.getEmailFieldText()
-        .then((myTxt) => {
-            assert.equal(profileDetails.email, myTxt)
+        .then((elementText) => {
+            assert.equal(userProfileDetails.email, elementText)
         })
 
     profilePage.getPhoneFieldText()
-        .then((myTxt) => {
-            assert.equal(profileDetails.phone, myTxt)
+        .then((elementText) => {
+            assert.equal(userProfileDetails.phone, elementText)
         })
 
     profilePage.getNameFieldText1()
-        .then((myTxt) => {
-            assert.equal(profileDetails.name, myTxt)
+        .then((elementText) => {
+            assert.equal(userProfileDetails.name, elementText)
         })
 
     profilePage.getAddressFieldText()
-        .then((myTxt) => {
-            assert.equal(profileDetails.address, myTxt)
+        .then((elementText) => {
+            assert.equal(userProfileDetails.address, elementText)
         })
 
     profilePage.getSupportPinText()
-        .then((myTxt) => {
-            assert.equal(profileDetails.supportPin, myTxt)
+        .then((elementText) => {
+            assert.equal(userProfileDetails.supportPin, elementText)
         })
 
     profilePage.getPasswordField()
-        .then((myTxt) => {
+        .then((elementText) => {
             let passwordState
-            if (myTxt !== '') {
+            if (elementText !== '') {
                 passwordState = 'true'
             }
             else {
                 passwordState = 'false'
             }
-            assert.equal(profileDetails.password, passwordState)
+            assert.equal(userProfileDetails.password, passwordState)
         })
 
     profilePage.getNewsLetterButton()
-        .then((x) => {
+        .then((element) => {
             let newsLetterState
-            if (x.is("enabled")) { newsLetterState = 'true' }
+            if (element.is("enabled")) { newsLetterState = 'true' }
             else { newsLetterState = 'false' }
-            assert.equal(profileDetails.newsLetter, newsLetterState)
+            assert.equal(userProfileDetails.newsLetter, newsLetterState)
         })
 });
