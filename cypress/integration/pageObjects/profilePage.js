@@ -16,7 +16,8 @@ class profilePage extends basePage {
     }
 
     openPageURL() {
-        this.pageUrl = 'https://www.sbzend.ssls.com/user/profile'
+        // this.pageUrl = 'https://www.sbzend.ssls.com/user/profile'
+        this.pageUrl='https://www.ssls.com/user/profile'
         super.openPageURL(this.pageUrl)
     }
 
@@ -29,16 +30,10 @@ class profilePage extends basePage {
     }
     getEmailFieldText() {
         return cy.get(this.locators.emailField).then((x) => {
-            const poo = x.text()
-            return poo
+            const myText = x.text()
+            return myText
         })
-
-        // return cy.get(this.locators.emailField).then(($text) => {
-        //     const txt = $text.text()
-
-
-        // })
-        // return homePage.email
+        
     }
 
 

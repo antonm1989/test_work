@@ -28,7 +28,7 @@ Given('I am logged in', () => {
 });
 
 When('I open Home page', () => {
-    // cy.visit('https://www.sbzend.ssls.com')
+   
     homePage.openPageURL()
 });
 
@@ -67,7 +67,7 @@ Then('I should see error message', () => {
     authPage.getErrorMessage().should('be.visible')
 });
 
-Then('I should see User button', () => {
+Then('I should see User icon', () => {
     homePage.getLoggedInUserIcon().should('be.visible')
     homePage.getLoginText().should('not.be.visible')
 });
@@ -82,21 +82,13 @@ Then('I should see Profile page', () => {
 });
 
 Then('I should see Profile details', () => {
-    // profilePage.getEmailFieldText()
-    // cy.log(profilePage.email)
-
-    // profilePage.getEmailFieldText().then((txt) => {
-    //     console.log("from test: " + txt)
-    // })
-    // let myX
+   
     profilePage.getEmailFieldText()
         .then((myTxt) => {
             console.log(myTxt)
-            // do your test here
-            // assert(myTxt).equals('hi anton')
-            // myX = myTxt;
+            
         })
-    // console.log("x = " + myX)
+    
 });
 
 

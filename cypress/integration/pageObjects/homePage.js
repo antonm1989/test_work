@@ -11,7 +11,7 @@ class homePage extends basePage {
     }
     
     openPageURL() {
-        this.pageUrl = 'https://www.sbzend.ssls.com'
+        this.pageUrl = 'https://www.ssls.com/'
         super.openPageURL(this.pageUrl)
     }
 

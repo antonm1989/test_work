@@ -25,7 +25,7 @@ Feature: Test work
         When I enter credentials and click on eye icon
         Then I should see entered password
         When I click on Login button
-        Then I should see User button
+        Then I should see User icon
 
     Scenario: My profile page. Client area
         Given I am logged in
