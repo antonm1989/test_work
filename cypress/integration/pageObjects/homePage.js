@@ -34,6 +34,10 @@ class homePage extends basePage {
     getProfileDropdownOption(){
         return cy.xpath(this.locators.profileDropdownOption)
     }
+
+    getLogOutDropdownOption(){
+        return cy.get('button').contains('Log out')
+    }
 }
 export default homePage
 

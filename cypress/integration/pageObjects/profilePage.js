@@ -66,7 +66,7 @@ class profilePage extends basePage {
     }
 
     getNewsLetterButton() {
-        return cy.get(this.locators.newsletterSwitch).should('be.checked').then((x) => {
+        return cy.get(this.locators.newsletterSwitch).then((x) => {
             return x
         })
         // return cy.get(this.locators.newsletterSwitch).should('be.checked')

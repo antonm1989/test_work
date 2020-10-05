@@ -133,15 +133,60 @@ Then('I should see Profile details', () => {
 
     profilePage.getNewsLetterButton()
         .then((x) => {
-            if (x) { profileDetails.newsLetter = 'true' }
+            if (x.is("enabled")) { profileDetails.newsLetter = 'true' }
             else { profileDetails.newsLetter = 'false' }
-            console.log("newsLetter: " + profileDetails.newsLetter)
+            console.log("newsLetter status: " + profileDetails.newsLetter)
         })
-    // profileDetails.newsLetter = profilePage.getNewsLetterButton()
-    // console.log("newsletter: " + profileDetails.newsLetter)
-
 });
 
+When('I click dropdown triangle and select Log Out', () => {
+    homePage.getDropdownTriangle().should('be.visible').click()
+    homePage.getLogOutDropdownOption().click()
+});
 
+Then('I should see the same Profile details as before', () => {
+    profilePage.getEmailFieldText()
+        .then((myTxt) => {
+            assert.equal(profileDetails.email, myTxt)
+        })
 
+    profilePage.getPhoneFieldText()
+        .then((myTxt) => {
+            assert.equal(profileDetails.phone, myTxt)
+        })
 
+    profilePage.getNameFieldText1()
+        .then((myTxt) => {
+            assert.equal(profileDetails.name, myTxt)
+        })
+
+    profilePage.getAddressFieldText()
+        .then((myTxt) => {
+            assert.equal(profileDetails.address, myTxt)
+        })
+
+    profilePage.getSupportPinText()
+        .then((myTxt) => {
+            assert.equal(profileDetails.supportPin, myTxt)
+        })
+
+    profilePage.getPasswordField()
+        .then((myTxt) => {
+            let passwordState
+            if (myTxt !== '') {
+                passwordState = 'true'
+            }
+            else {
+                passwordState = 'false'
+            }
+            assert.equal(profileDetails.password, passwordState)
+        })
+
+    profilePage.getNewsLetterButton()
+        .then((x) => {
+            let newsLetterState
+            if (x.is("enabled")) { newsLetterState = 'true' }
+            else { newsLetterState = 'false' }
+            assert.equal(profileDetails.newsLetter, newsLetterState)
+        })
+});
