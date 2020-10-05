@@ -38,12 +38,10 @@ class profilePage extends basePage {
     }
 
     getPasswordField() {
-        return expect(cy.get(this.locators.passwordField)).to.not.be.empty
-        // return cy.get(this.locators.passwordField)
-        // return cy.get(this.locators.passwordField).then((x) => {
-        //     const myText = x.text()
-        //     return myText
-        // })
+        return cy.get(this.locators.passwordField).then((x) => {
+            const myText = x.text()
+            return assert.notEqual(myText, '')
+        })
     }
 
     getPhoneFieldText() {
@@ -67,9 +65,12 @@ class profilePage extends basePage {
         })
     }
 
-    // getNewsLetterButton() {
-    //     return cy.get(this.locators.newsletterSwitch).should('be.disabled')
-    // }
+    getNewsLetterButton() {
+        return cy.get(this.locators.newsletterSwitch).should('be.checked').then((x) => {
+            return x
+        })
+        // return cy.get(this.locators.newsletterSwitch).should('be.checked')
+    }
 
 
 

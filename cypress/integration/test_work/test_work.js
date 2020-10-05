@@ -124,25 +124,24 @@ Then('I should see Profile details', () => {
             profileDetails.supportPin = myTxt
         })
 
-    // profilePage.getPasswordField()
-    //     .then((myTxt) => {
-    //         console.log("password: " + myTxt)
-    //         profileDetails.password = myTxt
-    //     })
+    profilePage.getPasswordField()
+        .then((myTxt) => {
+            if (myTxt !== '') { profileDetails.password = 'true' }
+            else { profileDetails.password = 'false' }
+            console.log("password is not empty: " + profileDetails.password)
+        })
 
-    profileDetails.password = profilePage.getPasswordField()
-    profileDetails.password.should('not.be.empty')
-    console.log("password: " + profileDetails.password)
-
+    profilePage.getNewsLetterButton()
+        .then((x) => {
+            if (x) { profileDetails.newsLetter = 'true' }
+            else { profileDetails.newsLetter = 'false' }
+            console.log("newsLetter: " + profileDetails.newsLetter)
+        })
     // profileDetails.newsLetter = profilePage.getNewsLetterButton()
     // console.log("newsletter: " + profileDetails.newsLetter)
 
 });
 
-// Then('I should see saved text', () => {
 
-//     console.log("global text: " + globalText)
-
-// });
 
 
