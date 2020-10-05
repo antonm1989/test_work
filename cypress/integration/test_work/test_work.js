@@ -6,11 +6,22 @@ import Profile from '../pageObjects/profilePage'
 const homePage = new Home()
 const user = new User()
 const authPage = new Auth()
-const profilePage = new Profile
+const profilePage = new Profile()
 
 authPage.setupLocators()
 homePage.setupLocators()
 profilePage.setupLocators()
+
+let profileDetails = {
+
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    address: '',
+    supportPin: '',
+    newsLetter: ''
+}
 
 Given('I am not registered user', () => {
     user.email = 'random_email@gmail.com'
@@ -28,7 +39,7 @@ Given('I am logged in', () => {
 });
 
 When('I open Home page', () => {
-   
+
     homePage.openPageURL()
 });
 
@@ -82,13 +93,56 @@ Then('I should see Profile page', () => {
 });
 
 Then('I should see Profile details', () => {
-   
+
     profilePage.getEmailFieldText()
         .then((myTxt) => {
-            console.log(myTxt)
-            
+            profileDetails.email = myTxt
+            console.log("email: " + profileDetails.email)
         })
-    
+
+    profilePage.getPhoneFieldText()
+        .then((myTxt) => {
+            console.log("phone: " + myTxt)
+            profileDetails.phone = myTxt
+        })
+
+    profilePage.getNameFieldText1()
+        .then((myTxt) => {
+            console.log("name: " + myTxt)
+            profileDetails.name = myTxt
+        })
+
+    profilePage.getAddressFieldText()
+        .then((myTxt) => {
+            console.log("address: " + myTxt)
+            profileDetails.address = myTxt
+        })
+
+    profilePage.getSupportPinText()
+        .then((myTxt) => {
+            console.log("pin: " + myTxt)
+            profileDetails.supportPin = myTxt
+        })
+
+    // profilePage.getPasswordField()
+    //     .then((myTxt) => {
+    //         console.log("password: " + myTxt)
+    //         profileDetails.password = myTxt
+    //     })
+
+    profileDetails.password = profilePage.getPasswordField()
+    profileDetails.password.should('not.be.empty')
+    console.log("password: " + profileDetails.password)
+
+    // profileDetails.newsLetter = profilePage.getNewsLetterButton()
+    // console.log("newsletter: " + profileDetails.newsLetter)
+
 });
+
+// Then('I should see saved text', () => {
+
+//     console.log("global text: " + globalText)
+
+// });
 
 

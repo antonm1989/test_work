@@ -1,23 +1,21 @@
-/// <reference types = "Cypress" />
-
 import basePage from "./basePage"
 import homePage from "./homePage"
 
 class profilePage extends basePage {
     setupLocators() {
         super.addLocator("profilePageHeader", "//h1[@class='page-title'][contains(text(),'Profile')]")
-        super.addLocator("nameField", "//div[contains(@ng-class,'name')]/div[@class='description']/span")
+        super.addLocator("nameField", "span[ng-hide*=\"activeRow === \'name\'\"]")
         super.addLocator("emailField", "span[ng-hide*=\"activeRow === \'email\'\"]")
-        super.addLocator("passwordField")
-        super.addLocator("phoneField")
-        super.addLocator("addressField")
-        super.addLocator("supportPinField")
-        super.addLocator("newsletterSwitch")
+        super.addLocator("passwordField", "span[ng-hide*=\"activeRow === \'password\'\"]")
+        super.addLocator("phoneField", "span[ng-hide*=\"activeRow === \'phone\'\"]")
+        super.addLocator("addressField", "span[ng-hide*=\"activeRow === \'address\'\"]")
+        super.addLocator("supportPinField", "//div[contains(@ng-class,'pin')]/div[contains(concat(' ',normalize-space(@class),' '),' description')]/span")
+        super.addLocator("newsletterSwitch", "button.toggle-btn")
     }
 
     openPageURL() {
         // this.pageUrl = 'https://www.sbzend.ssls.com/user/profile'
-        this.pageUrl='https://www.ssls.com/user/profile'
+        this.pageUrl = 'https://www.ssls.com/user/profile'
         super.openPageURL(this.pageUrl)
     }
 
@@ -25,16 +23,54 @@ class profilePage extends basePage {
         return cy.xpath(this.locators.profilePageHeader)
     }
 
-    getEmailField() {
-        return cy.get(this.locators.emailField).invoke('val')
-    }
     getEmailFieldText() {
         return cy.get(this.locators.emailField).then((x) => {
             const myText = x.text()
             return myText
         })
-        
     }
+
+    getNameFieldText1() {
+        return cy.get(this.locators.nameField).then((x) => {
+            const myText = x.text()
+            return myText
+        })
+    }
+
+    getPasswordField() {
+        return expect(cy.get(this.locators.passwordField)).to.not.be.empty
+        // return cy.get(this.locators.passwordField)
+        // return cy.get(this.locators.passwordField).then((x) => {
+        //     const myText = x.text()
+        //     return myText
+        // })
+    }
+
+    getPhoneFieldText() {
+        return cy.get(this.locators.phoneField).then((x) => {
+            const myText = x.text()
+            return myText
+        })
+    }
+
+    getAddressFieldText() {
+        return cy.get(this.locators.addressField).then((x) => {
+            const myText = x.text()
+            return myText
+        })
+    }
+
+    getSupportPinText() {
+        return cy.xpath(this.locators.supportPinField).then((x) => {
+            const myText = x.text()
+            return myText
+        })
+    }
+
+    // getNewsLetterButton() {
+    //     return cy.get(this.locators.newsletterSwitch).should('be.disabled')
+    // }
+
 
 
 }
