@@ -1,3 +1,6 @@
 {
-    "testFiles": "**/*.feature"
+    "viewportWidth": 1000,
+    "viewportHeight": 600,
+    "testFiles": "**/*.feature",
+    "chromeWebSecurity": false
 }

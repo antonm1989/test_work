@@ -1,64 +1,102 @@
 import Home from '../pageObjects/homePage'
 import User from '../pageObjects/user'
+import Auth from '../pageObjects/authPage'
+import Profile from '../pageObjects/profilePage'
 
 const homePage = new Home()
 const user = new User()
+const authPage = new Auth()
+const profilePage = new Profile
+
+authPage.setupLocators()
+homePage.setupLocators()
+profilePage.setupLocators()
 
 Given('I am not registered user', () => {
-    user.email='random_email@gmail.com'
-    user.password='123456'
+    user.email = 'random_email@gmail.com'
+    user.password = '123456'
+});
+
+Given('I am registered user', () => {
+    user.email = 'ssls.automation+666@gmail.com'
+    user.password = '123456'
+});
+
+Given('I am logged in', () => {
+    user.email = 'ssls.automation+666@gmail.com'
+    user.password = '123456'
 });
 
 When('I open Home page', () => {
+    // cy.visit('https://www.sbzend.ssls.com')
     homePage.openPageURL()
 });
 
 Then('I should see Home page', () => {
-    homePage.footerElement().should('be.visible')
+    homePage.getFooterElement().should('be.visible')
 });
 
-// Then('I should see button with LOG IN text', ()=> {
-//     homePage.loginButton().should('be.visible').click()   
-// });
-
-When('I click LOG IN text', ()=> {
-    homePage.loginSelector().should('be.visible').click()   
-    
+When('I click LOG IN text', () => {
+    homePage.getLoginText().should('be.visible').click()
 });
 
-Then('I should see Authorization page', ()=> {
-    
+Then('I should see Authorization page', () => {
+    authPage.getAuthPageHeader().should('be.visible')
 });
 
-Then('I should see credentials inputs', ()=> {
-    
+Then('I should see credentials inputs', () => {
+    authPage.getEmailInput().should('be.visible')
+    authPage.getPasswordInput().should('be.visible')
 });
 
-When('I enter credentials and click on eye icon', ()=> {
-    
+When('I enter credentials and click on eye icon', () => {
+    authPage.getEmailInput().type(user.email)
+    authPage.getPasswordInput().type(user.password)
+    authPage.getEyeIcon().should('be.visible').click()
 });
 
-Then('I should see entered password', () =>{
-    
+Then('I should see entered password', () => {
+    authPage.getPasswordInput().should('have.attr', 'type', 'text')
 });
 
-When('I click on Login button', ()=> {
-    
+When('I click on Login button', () => {
+    authPage.getLoginButton().should('be.visible').click()
 });
 
-Then('I should see error message', ()=> {
-    
+Then('I should see error message', () => {
+    authPage.getErrorMessage().should('be.visible')
 });
-// var locators = {
-//     loginSelector: "//span[contains(text(),'Log in')]",
-//     authPage: 'h1.page-title',
-//     footerSelector: 'footer.ssls-footer',
-//     enteredPassword: "//input[@name='password' and @type='text']",
-//     loginButton: "//button[contains(text(),'Login')]",
-//     eyeIcon: 'span.icon-eye',
-//     errorMessage: "//div[contains(text(),'Uh oh! Email or password is incorrect')]",
-//     errorMessage2: "//div[contains(text(),'Uh odfdh! Email or password is incorrect')]",
-//     loggedInUserIcon: "//span[contains(text(),'ssls.automation+666@gmail.com')]",
-//     dropdown: "div.ssls-dropdown__holder ssls-dropdown__holder--toolbar",
-//     wrongSelector: 'span.anton'
-// }
+
+Then('I should see User button', () => {
+    homePage.getLoggedInUserIcon().should('be.visible')
+    homePage.getLoginText().should('not.be.visible')
+});
+
+When('I click dropdown triangle and select Profile', () => {
+    homePage.getDropdownTriangle().should('be.visible').click()
+    homePage.getProfileDropdownOption().should('be.visible').click()
+});
+
+Then('I should see Profile page', () => {
+    profilePage.getProfilePageHeader().should('be.visible')
+});
+
+Then('I should see Profile details', () => {
+    // profilePage.getEmailFieldText()
+    // cy.log(profilePage.email)
+
+    // profilePage.getEmailFieldText().then((txt) => {
+    //     console.log("from test: " + txt)
+    // })
+    // let myX
+    profilePage.getEmailFieldText()
+        .then((myTxt) => {
+            console.log(myTxt)
+            // do your test here
+            // assert(myTxt).equals('hi anton')
+            // myX = myTxt;
+        })
+    // console.log("x = " + myX)
+});
+
+

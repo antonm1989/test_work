@@ -1,31 +1,38 @@
 import basePage from "./basePage"
 
 class homePage extends basePage {
-    constructor() {
-        this.pageUrl = 'https://www.sbzend.ssls.com'
-        this.locators["loginSelector"] = "//span[contains(text(),'Log in')]"
-
-        // this.locators = {
-        //     loginSelector: "//span[contains(text(),'Log in')]"            
-
-        // }
+    
+    setupLocators() {
+        super.addLocator("loginText" , "//span[contains(text(),'Log in')]")
+        super.addLocator("loggedInUserIcon", "//span[contains(text(),'ssls.automation+666@gmail.com')]")
+        super.addLocator("dropdownTriangle","//i[@class='ssls-icon ssls-icon-user-circle']")
+        super.addLocator("profileDropdownOption", "//a[@href='/user/profile']")
+        // a[href='/user/profile']
     }
-
-    // openPageURL() {
-    //     cy.visit(this.pageUrl)
-    // }
-
+    
     openPageURL() {
+        this.pageUrl = 'https://www.sbzend.ssls.com'
         super.openPageURL(this.pageUrl)
     }
 
-    footerElement() {
+    getFooterElement() {
         return cy.get(this.locators.footerSelector)
-
     }
 
-    loginSelector() {
-        return cy.xpath(this.locators.loginSelector)
+    getLoginText() {
+        return cy.xpath(this.locators.loginText)
+    }
+
+    getLoggedInUserIcon(){
+        return cy.xpath(this.locators.loggedInUserIcon)
+    }
+
+    getDropdownTriangle(){
+        return cy.xpath(this.locators.dropdownTriangle)
+    }
+
+    getProfileDropdownOption(){
+        return cy.xpath(this.locators.profileDropdownOption)
     }
 }
 export default homePage
