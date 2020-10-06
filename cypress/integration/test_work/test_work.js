@@ -2,6 +2,7 @@ import Home from '../pageObjects/homePage'
 import User from '../pageObjects/user'
 import Auth from '../pageObjects/authPage'
 import Profile from '../pageObjects/profilePage'
+import basePage from '../pageObjects/basePage'
 
 const homePage = new Home()
 const user = new User()
@@ -40,6 +41,22 @@ Given('I am not registered user', () => {
 Given('I am registered user', () => {
     user.email = registeredUser.email
     user.password = registeredUser.password
+});
+
+Given('I am logged in user', () => {
+    user.email = registeredUser.email
+    user.password = registeredUser.password
+
+    homePage.openPageURL()
+    homePage.getFooterElement().should('be.visible')
+    homePage.getLoginText().should('be.visible').click()
+    authPage.getEmailInput().should('be.visible')
+    authPage.getPasswordInput().should('be.visible')
+    authPage.getEmailInput().type(user.email)
+    authPage.getPasswordInput().type(user.password)
+    authPage.getLoginButton().should('be.visible').click()
+    homePage.getLoggedInUserIcon().should('be.visible')
+    homePage.getLoginText().should('not.be.visible')
 });
 
 When('I open Home page', () => {
