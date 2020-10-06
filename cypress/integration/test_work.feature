@@ -30,12 +30,6 @@ Feature: Test work
         Then I should see User icon
 
     Scenario: My profile page. Client area
-        # Given I am registered user
-        # When I open Home page
-        # And I click LOG IN text
-        # And I enter credentials
-        # And I click on Login button
-        # Then I should see User icon
         Given I am logged in user
         When I click dropdown triangle
         And I select Profile
