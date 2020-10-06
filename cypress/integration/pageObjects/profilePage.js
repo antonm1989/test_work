@@ -22,45 +22,10 @@ class profilePage extends basePage {
         return cy.xpath(this.locators.profilePageHeader)
     }
 
-    getEmailFieldText() {
-        return cy.get(this.locators.emailField).then((element) => {
-            const elementText = element.text()
-            return elementText
-        })
-    }
-
-    getNameFieldText1() {
-        return cy.get(this.locators.nameField).then((element) => {
-            const elementText = element.text()
-            return elementText
-        })
-    }
-
     getPasswordField() {
         return cy.get(this.locators.passwordField).then((element) => {
             const elementText = element.text()
             return assert.notEqual(elementText, '')
-        })
-    }
-
-    getPhoneFieldText() {
-        return cy.get(this.locators.phoneField).then((element) => {
-            const elementText = element.text()
-            return elementText
-        })
-    }
-
-    getAddressFieldText() {
-        return cy.get(this.locators.addressField).then((element) => {
-            const elementText = element.text()
-            return elementText
-        })
-    }
-
-    getSupportPinText() {
-        return cy.xpath(this.locators.supportPinField).then((element) => {
-            const elementText = element.text()
-            return elementText
         })
     }
 

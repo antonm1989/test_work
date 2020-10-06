@@ -73,6 +73,7 @@ When('I click LOG IN text', () => {
 
 Then('I should see Authorization page', () => {
     authPage.getAuthPageHeader().should('be.visible')
+    cy.xpath(authPage.locators.authPageHeader).should('be.visible')
 });
 
 Then('I should see credentials inputs', () => {
@@ -120,27 +121,27 @@ Then('I should see Profile page', () => {
 
 Then('I should see Profile details', () => {
 
-    profilePage.getEmailFieldText()
+    profilePage.getElementText(profilePage.locators.emailField)
         .then((elementText) => {
             userProfileDetails.email = elementText
         })
 
-    profilePage.getPhoneFieldText()
+    profilePage.getElementText(profilePage.locators.phoneField)
         .then((elementText) => {
             userProfileDetails.phone = elementText
         })
 
-    profilePage.getNameFieldText1()
+    profilePage.getElementText(profilePage.locators.nameField)
         .then((elementText) => {
             userProfileDetails.name = elementText
         })
 
-    profilePage.getAddressFieldText()
+    profilePage.getElementText(profilePage.locators.addressField)
         .then((elementText) => {
             userProfileDetails.address = elementText
         })
 
-    profilePage.getSupportPinText()
+    profilePage.getElementText(profilePage.locators.supportPinField)
         .then((elementText) => {
             userProfileDetails.supportPin = elementText
         })
@@ -163,27 +164,28 @@ When('I select Log Out', () => {
 });
 
 Then('I should see the same Profile details as before', () => {
-    profilePage.getEmailFieldText()
+
+    profilePage.getElementText(profilePage.locators.emailField)
         .then((elementText) => {
             assert.equal(userProfileDetails.email, elementText)
         })
 
-    profilePage.getPhoneFieldText()
+    profilePage.getElementText(profilePage.locators.phoneField)
         .then((elementText) => {
             assert.equal(userProfileDetails.phone, elementText)
         })
 
-    profilePage.getNameFieldText1()
+    profilePage.getElementText(profilePage.locators.nameField)
         .then((elementText) => {
             assert.equal(userProfileDetails.name, elementText)
         })
 
-    profilePage.getAddressFieldText()
+    profilePage.getElementText(profilePage.locators.addressField)
         .then((elementText) => {
             assert.equal(userProfileDetails.address, elementText)
         })
 
-    profilePage.getSupportPinText()
+    profilePage.getElementText(profilePage.locators.supportPinField)
         .then((elementText) => {
             assert.equal(userProfileDetails.supportPin, elementText)
         })
