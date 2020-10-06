@@ -1,20 +1,31 @@
 class basePage {
     constructor() {
-        // this.pageUrl = 'https://www.sbzend.ssls.com'
         this.locators = {
             footerSelector: 'footer.ssls-footer',
-            wrongSelector: 'span.anton'
         }
     }
 
-    
     openPageURL(url) {
         return cy.visit(url)
     }
 
-    addLocator(newLocator, newValue) {
-        return this.locators[newLocator] = newValue
+    addLocator(newLocatorName, newLocatorValue) {
+        this.locators[newLocatorName] = newLocatorValue
     }
 
+    getElementText(elementLocator) {
+        if (elementLocator.startsWith('//')) {
+            return cy.xpath(elementLocator).then((element) => {
+                const elementText = element.text()
+                return elementText
+            })
+        } else {
+            return cy.get(elementLocator).then((element) => {
+                const elementText = element.text()
+                return elementText
+            })
+
+        }
+    }
 }
 export default basePage

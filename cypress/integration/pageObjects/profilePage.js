@@ -14,7 +14,6 @@ class profilePage extends basePage {
     }
 
     openPageURL() {
-        // this.pageUrl = 'https://www.sbzend.ssls.com/user/profile'
         this.pageUrl = 'https://www.ssls.com/user/profile'
         super.openPageURL(this.pageUrl)
     }
@@ -23,56 +22,17 @@ class profilePage extends basePage {
         return cy.xpath(this.locators.profilePageHeader)
     }
 
-    getEmailFieldText() {
-        return cy.get(this.locators.emailField).then((x) => {
-            const myText = x.text()
-            return myText
-        })
-    }
-
-    getNameFieldText1() {
-        return cy.get(this.locators.nameField).then((x) => {
-            const myText = x.text()
-            return myText
-        })
-    }
-
     getPasswordField() {
-        return cy.get(this.locators.passwordField).then((x) => {
-            const myText = x.text()
-            return assert.notEqual(myText, '')
-        })
-    }
-
-    getPhoneFieldText() {
-        return cy.get(this.locators.phoneField).then((x) => {
-            const myText = x.text()
-            return myText
-        })
-    }
-
-    getAddressFieldText() {
-        return cy.get(this.locators.addressField).then((x) => {
-            const myText = x.text()
-            return myText
-        })
-    }
-
-    getSupportPinText() {
-        return cy.xpath(this.locators.supportPinField).then((x) => {
-            const myText = x.text()
-            return myText
+        return cy.get(this.locators.passwordField).then((element) => {
+            const elementText = element.text()
+            return assert.notEqual(elementText, '')
         })
     }
 
     getNewsLetterButton() {
-        return cy.get(this.locators.newsletterSwitch).then((x) => {
-            return x
+        return cy.get(this.locators.newsletterSwitch).then((element) => {
+            return element
         })
-        // return cy.get(this.locators.newsletterSwitch).should('be.checked')
     }
-
-
-
 }
 export default profilePage

@@ -13,7 +13,7 @@ class authPage extends basePage {
     }
 
     openPageURL() {
-        this.pageUrl = 'https://www.sbzend.ssls.com/authorize'
+        this.pageUrl = 'https://www.ssls.com/authorize'
         super.openPageURL(this.pageUrl)
     }
 
@@ -37,7 +37,7 @@ class authPage extends basePage {
         return cy.xpath(this.locators.loginButton)
     }
 
-    getErrorMessage(){
+    getErrorMessage() {
         return cy.xpath(this.locators.errorMessage)
     }
 }
